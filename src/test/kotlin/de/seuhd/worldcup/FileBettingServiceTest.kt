@@ -1,5 +1,6 @@
 package de.seuhd.worldcup
 
+import org.junit.jupiter.api.BeforeEach
 import java.io.File
 import kotlin.io.path.createTempFile
 import kotlin.test.Test
@@ -10,6 +11,11 @@ import org.junit.jupiter.api.TestMethodOrder
 /** Tests for [FileBettingService]. */
 @TestMethodOrder(MethodOrderer.Random::class)
 class FileBettingServiceTest {
+
+    @BeforeEach
+    fun cleanup() {
+        SHARED_BET_FILE.delete()
+    }
 
     @Test
     fun `test file betting with threads`() {

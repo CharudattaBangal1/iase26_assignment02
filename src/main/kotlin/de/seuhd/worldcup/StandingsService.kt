@@ -57,6 +57,7 @@ object StandingsService {
                 compareByDescending<TableEntry> { it.points }
                     .thenByDescending { it.goalDiff }
                     .thenByDescending { it.goalsFor }
+                    .thenBy { it.team.name }
             )
     }
 }

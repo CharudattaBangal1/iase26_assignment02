@@ -7,8 +7,9 @@ import java.io.File
  * line; placing a bet for a match id that already exists overwrites the previous
  * line.
  */
-class FileBettingService(private val file: File) {
 
+class FileBettingService(private val file: File) {
+@Synchronized
     fun placeBet(bet: Bet) {
         val bets = readBets()
         bets[bet.matchId] = bet

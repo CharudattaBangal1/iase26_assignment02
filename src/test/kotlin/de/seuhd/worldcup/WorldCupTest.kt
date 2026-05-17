@@ -170,7 +170,12 @@ class WorldCupTest {
     @Test
     @Timeout(value = 300, unit = TimeUnit.MILLISECONDS)
     fun `load json from network`(){
-        val jsonNetwork = JsonLoader.loadJsonFromNetwork()
+        //Give me the JVM runtime representation of JsonLoader.
+        //:: reference of the class
+        val localStream = { JsonLoader::class.java.getResourceAsStream("/world_cup_2026_full_data.json")!! }
+        val fakeFetcher = UrlFetcher { localStream() }
+    // In url fetcher we are completely ignoring the url passed and returning a hard coded stream instead.
+        val jsonNetwork = JsonLoader.loadJsonFromNetwork(fetcher = fakeFetcher)
         val jsonLocal = JsonLoader.loadJson()
 
         assertEquals(jsonLocal, jsonNetwork)
